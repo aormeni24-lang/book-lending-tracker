@@ -152,7 +152,7 @@
 
 /* ---------- Table ---------- */
 .ui-table-wrap { overflow-x: auto; }
-.ui-table { width: 100%; border-collapse: collapse; min-width: 720px; }
+.ui-table { width: 100%; border-collapse: collapse; min-width: 640px; }
 .ui-table th, .ui-table td {
   text-align: left;
   padding: 12px 10px;
@@ -183,3 +183,32 @@
 /* ---------- Misc ---------- */
 .ui-empty { margin: 16px 0 0; text-align: center; color: var(--ui-muted); }
 .ui-hidden { display: none; }
+
+/* ==========================================================
+   Layout update: two-column dashboard, centered header/stats
+   ========================================================== */
+.ui-center { text-align: center; }
+.ui-grid-1 { grid-template-columns: 1fr; }
+
+.ui-layout {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.ui-sticky { position: sticky; top: 16px; }
+.ui-btn-block { width: 100%; }
+
+.ui-stat { align-items: center; text-align: center; }
+.ui-header { padding: 36px 0; }
+.ui-col-center { text-align: center !important; }
+.ui-table td:nth-child(6), .ui-table td:nth-child(7) { text-align: center; }
+.ui-actions { justify-content: center; }
+.ui-table-wrap { border: 1px solid var(--ui-border); border-radius: var(--ui-radius); }
+.ui-table th { background: #f9fafb; }
+
+@media (max-width: 900px) {
+  .ui-layout { grid-template-columns: 1fr; }
+  .ui-sticky { position: static; }
+}
+.ui-layout > * { min-width: 0; }
