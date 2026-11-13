@@ -1,4 +1,170 @@
-/* Project stylesheet.
-   All styling comes from the CSS library (ui-library.css);
-   no other styles are defined here. */
-@import url("ui-library.css");
+/* ==========================================================
+   styles.css — a small, generic, reusable CSS library.
+
+   It contains no page-specific selectors (no ids, no "book"
+   classes). Any page can be styled by combining these classes.
+   The Book Lending Tracker uses ONLY these classes.
+
+   Sections: tokens · base · layout · typography · components
+             (header, card, stat, form, button, table, badge)
+             · utilities
+   ========================================================== */
+
+/* ---------- Tokens ---------- */
+:root {
+  --bg: #f3f5f9;
+  --surface: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --border: #d9dee7;
+  --primary: #4f46e5;
+  --primary-dark: #4338ca;
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
+  --success: #15803d;
+  --success-soft: #dcfce7;
+  --warning: #b45309;
+  --warning-soft: #fef3c7;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(16, 24, 40, 0.08), 0 1px 2px rgba(16, 24, 40, 0.06);
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.page { min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ---------- Layout ---------- */
+.container { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+.main { flex: 1; padding-top: 24px; padding-bottom: 40px; }
+.stack { display: flex; flex-direction: column; gap: 24px; }
+
+.grid { display: grid; gap: 16px; }
+.grid-1 { grid-template-columns: 1fr; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-sidebar { grid-template-columns: 300px minmax(0, 1fr); gap: 24px; align-items: start; }
+.grid > * { min-width: 0; }
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-end { justify-content: flex-end; }
+.wrap { flex-wrap: wrap; }
+.gap-1 { gap: 6px; }
+.gap-2 { gap: 12px; }
+.sticky { position: sticky; top: 16px; }
+
+@media (max-width: 900px) {
+  .grid-sidebar { grid-template-columns: 1fr; }
+  .sticky { position: static; }
+}
+@media (max-width: 760px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* ---------- Typography ---------- */
+.h1 { margin: 0; font-size: 1.9rem; line-height: 1.2; }
+.h2 { margin: 0 0 16px; font-size: 1.15rem; }
+.text-muted { color: var(--muted); }
+.text-sm { font-size: 0.85rem; }
+.text-center { text-align: center; }
+.text-danger { color: var(--danger); }
+.text-primary { color: var(--primary); }
+.uppercase { text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* ---------- Header / footer ---------- */
+.header { background: var(--primary); color: #fff; padding: 28px 0; }
+.header-subtitle { margin: 4px 0 0; opacity: 0.9; }
+.footer {
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* ---------- Card ---------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+/* ---------- Stat (big number + label) ---------- */
+.stat { display: flex; flex-direction: column; gap: 4px; }
+.stat-label { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.stat-value { font-size: 2.4rem; font-weight: 700; line-height: 1.1; }
+
+/* ---------- Form ---------- */
+.field { display: flex; flex-direction: column; gap: 6px; }
+.label { font-size: 0.9rem; font-weight: 600; }
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--text);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2); }
+.input-invalid { border-color: var(--danger); }
+.error-text { color: var(--danger); font-size: 0.82rem; min-height: 1.2em; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  font: inherit;
+  font-weight: 600;
+  padding: 10px 16px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, transform 0.05s;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-dark); }
+.btn-success { background: var(--success-soft); color: var(--success); }
+.btn-success:hover { background: #bbf7d0; }
+.btn-danger { background: var(--danger-soft); color: var(--danger); }
+.btn-danger:hover { background: #fecaca; }
+.btn-sm { padding: 6px 10px; font-size: 0.85rem; }
+.btn-block { width: 100%; }
+
+/* ---------- Table ---------- */
+.table-wrap { overflow-x: auto; }
+.table-bordered { border: 1px solid var(--border); border-radius: var(--radius); }
+.table { width: 100%; border-collapse: collapse; min-width: 640px; }
+.table th, .table td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.table th { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+.table th.text-center, .table td.text-center { text-align: center; }
+.table tbody tr:hover { background: #f9fafb; }
+.table-head-muted th { background: #f9fafb; }
+.row-danger { background: #fff7f7; }
+
+/* ---------- Badge ---------- */
+.badge { display: inline-block; white-space: nowrap; padding: 3px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; }
+.badge-success { background: var(--success-soft); color: var(--success); }
+.badge-danger { background: var(--danger-soft); color: var(--danger); }
+.badge-warning { background: var(--warning-soft); color: var(--warning); }
+
+/* ---------- Utilities ---------- */
+.m-0 { margin: 0; }
+.mt-2 { margin-top: 16px; }
+.p-lg { padding-top: 36px; padding-bottom: 36px; }
+.hidden { display: none; }

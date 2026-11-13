@@ -4,106 +4,104 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book Lending Tracker</title>
+  <!-- The only stylesheet: our CSS library -->
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="ui-body">
-  <header class="ui-header">
-    <div class="ui-container ui-center">
-      <h1 class="ui-title">Book Lending Tracker</h1>
-      <p class="ui-subtitle">Keep track of the books you have lent out.</p>
+<body class="page">
+  <header class="header p-lg">
+    <div class="container text-center">
+      <h1 class="h1">Book Lending Tracker</h1>
+      <p class="header-subtitle">Keep track of the books you have lent out.</p>
     </div>
   </header>
 
-  <main class="ui-container ui-stack">
-
+  <main class="container main stack">
     <!-- Summary area -->
-    <section class="ui-grid ui-grid-2 ui-center" aria-label="Summary">
-      <div class="ui-card ui-stat">
-        <span class="ui-stat-label">Total loans</span>
-        <span class="ui-stat-value" id="total-loans">0</span>
+    <section class="grid grid-2" aria-label="Summary">
+      <div class="card stat items-center text-center">
+        <span class="stat-label">Total loans</span>
+        <span class="stat-value text-primary" id="total-loans">0</span>
       </div>
-      <div class="ui-card ui-stat ui-stat-danger">
-        <span class="ui-stat-label">Overdue loans</span>
-        <span class="ui-stat-value" id="overdue-loans">0</span>
+      <div class="card stat items-center text-center">
+        <span class="stat-label">Overdue loans</span>
+        <span class="stat-value text-danger" id="overdue-loans">0</span>
       </div>
     </section>
 
-    <div class="ui-layout">
-    <!-- Form -->
-    <section class="ui-card ui-sticky">
-      <h2 class="ui-card-title">Lend a book</h2>
-      <form id="loan-form" class="ui-grid ui-grid-1" novalidate>
-        <div class="ui-field">
-          <label class="ui-label" for="title">Title</label>
-          <input class="ui-input" type="text" id="title" name="title" placeholder="e.g. Dune">
-          <span class="ui-error" id="title-error" role="alert"></span>
+    <div class="grid grid-sidebar">
+      <section class="card sticky">
+        <h2 class="h2">Lend a book</h2>
+        <form id="loan-form" class="grid grid-1" novalidate>
+          <div class="field">
+            <label class="label" for="title">Title</label>
+            <input class="input" type="text" id="title" name="title" placeholder="e.g. Dune">
+            <span class="error-text" data-error-for="title" role="alert"></span>
+          </div>
+          <div class="field">
+            <label class="label" for="author">Author</label>
+            <input class="input" type="text" id="author" name="author" placeholder="e.g. Frank Herbert">
+            <span class="error-text" data-error-for="author" role="alert"></span>
+          </div>
+          <div class="field">
+            <label class="label" for="borrower">Borrower</label>
+            <input class="input" type="text" id="borrower" name="borrower" placeholder="e.g. Elira">
+            <span class="error-text" data-error-for="borrower" role="alert"></span>
+          </div>
+          <div class="field">
+            <label class="label" for="dueDate">Due date</label>
+            <input class="input" type="date" id="dueDate" name="dueDate">
+            <span class="error-text" data-error-for="dueDate" role="alert"></span>
+          </div>
+          <div class="field">
+            <label class="label" for="genre">Genre</label>
+            <select class="input" id="genre" name="genre">
+              <option value="">Select a genre</option>
+              <option>Fiction</option>
+              <option>Non-fiction</option>
+              <option>Science fiction</option>
+              <option>Fantasy</option>
+              <option>Mystery</option>
+              <option>Biography</option>
+              <option>History</option>
+              <option>Science</option>
+              <option>Other</option>
+            </select>
+            <span class="error-text" data-error-for="genre" role="alert"></span>
+          </div>
+          <div class="field justify-end">
+            <button class="btn btn-primary btn-block" type="submit">Add loan</button>
+          </div>
+        </form>
+      </section>
+      <section class="card">
+        <h2 class="h2">Lent books</h2>
+        <div class="table-wrap table-bordered">
+          <table class="table">
+            <thead class="table-head-muted">
+              <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Borrower</th>
+                <th>Due date</th>
+                <th>Genre</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody id="loan-table-body"></tbody>
+          </table>
         </div>
-        <div class="ui-field">
-          <label class="ui-label" for="author">Author</label>
-          <input class="ui-input" type="text" id="author" name="author" placeholder="e.g. Frank Herbert">
-          <span class="ui-error" id="author-error" role="alert"></span>
-        </div>
-        <div class="ui-field">
-          <label class="ui-label" for="borrower">Borrower</label>
-          <input class="ui-input" type="text" id="borrower" name="borrower" placeholder="e.g. Elira">
-          <span class="ui-error" id="borrower-error" role="alert"></span>
-        </div>
-        <div class="ui-field">
-          <label class="ui-label" for="dueDate">Due date</label>
-          <input class="ui-input" type="date" id="dueDate" name="dueDate">
-          <span class="ui-error" id="dueDate-error" role="alert"></span>
-        </div>
-        <div class="ui-field">
-          <label class="ui-label" for="genre">Genre</label>
-          <select class="ui-input" id="genre" name="genre">
-            <option value="">Select a genre</option>
-            <option>Fiction</option>
-            <option>Non-fiction</option>
-            <option>Science fiction</option>
-            <option>Fantasy</option>
-            <option>Mystery</option>
-            <option>Biography</option>
-            <option>History</option>
-            <option>Science</option>
-            <option>Other</option>
-          </select>
-          <span class="ui-error" id="genre-error" role="alert"></span>
-        </div>
-        <div class="ui-field ui-field-action">
-          <button class="ui-btn ui-btn-primary ui-btn-block" type="submit">Add loan</button>
-        </div>
-      </form>
-    </section>
-
-    <!-- Table -->
-    <section class="ui-card">
-      <h2 class="ui-card-title">Lent books</h2>
-      <div class="ui-table-wrap">
-        <table class="ui-table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Borrower</th>
-              <th>Due date</th>
-              <th>Genre</th>
-              <th class="ui-col-center">Status</th>
-              <th class="ui-col-center">Action</th>
-            </tr>
-          </thead>
-          <tbody id="loan-table-body"></tbody>
-        </table>
-      </div>
-      <p class="ui-empty" id="empty-message">No books lent yet. Add one above.</p>
-    </section>
+        <p class="text-muted text-center mt-2 m-0" id="empty-message">No books lent yet. Add one above.</p>
+      </section>
     </div>
   </main>
 
-  <footer class="ui-footer">
-    <div class="ui-container">Book Lending Tracker &middot; HTML, CSS &amp; JavaScript</div>
+  <footer class="footer">
+    <div class="container">Book Lending Tracker &middot; HTML, CSS &amp; JavaScript</div>
   </footer>
 
-  <script src="book-lending.js"></script>
+  <!-- 1) the JavaScript library, 2) the app that uses it -->
+  <script src="lib.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
