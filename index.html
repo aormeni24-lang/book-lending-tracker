@@ -8,7 +8,7 @@
 </head>
 <body class="ui-body">
   <header class="ui-header">
-    <div class="ui-container">
+    <div class="ui-container ui-center">
       <h1 class="ui-title">Book Lending Tracker</h1>
       <p class="ui-subtitle">Keep track of the books you have lent out.</p>
     </div>
@@ -17,7 +17,7 @@
   <main class="ui-container ui-stack">
 
     <!-- Summary area -->
-    <section class="ui-grid ui-grid-2" aria-label="Summary">
+    <section class="ui-grid ui-grid-2 ui-center" aria-label="Summary">
       <div class="ui-card ui-stat">
         <span class="ui-stat-label">Total loans</span>
         <span class="ui-stat-value" id="total-loans">0</span>
@@ -28,10 +28,11 @@
       </div>
     </section>
 
+    <div class="ui-layout">
     <!-- Form -->
-    <section class="ui-card">
+    <section class="ui-card ui-sticky">
       <h2 class="ui-card-title">Lend a book</h2>
-      <form id="loan-form" class="ui-grid ui-grid-3" novalidate>
+      <form id="loan-form" class="ui-grid ui-grid-1" novalidate>
         <div class="ui-field">
           <label class="ui-label" for="title">Title</label>
           <input class="ui-input" type="text" id="title" name="title" placeholder="e.g. Dune">
@@ -69,7 +70,7 @@
           <span class="ui-error" id="genre-error" role="alert"></span>
         </div>
         <div class="ui-field ui-field-action">
-          <button class="ui-btn ui-btn-primary" type="submit">Add loan</button>
+          <button class="ui-btn ui-btn-primary ui-btn-block" type="submit">Add loan</button>
         </div>
       </form>
     </section>
@@ -86,8 +87,8 @@
               <th>Borrower</th>
               <th>Due date</th>
               <th>Genre</th>
-              <th>Status</th>
-              <th>Action</th>
+              <th class="ui-col-center">Status</th>
+              <th class="ui-col-center">Action</th>
             </tr>
           </thead>
           <tbody id="loan-table-body"></tbody>
@@ -95,6 +96,7 @@
       </div>
       <p class="ui-empty" id="empty-message">No books lent yet. Add one above.</p>
     </section>
+    </div>
   </main>
 
   <footer class="ui-footer">
